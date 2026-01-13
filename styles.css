@@ -674,7 +674,36 @@ img {
         --section-padding: 60px;
     }
 
+    /* Base font adjustments for mobile */
+    body {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+    }
+
+    h2 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
     /* Navigation */
+    .navbar {
+        padding: 16px 0;
+    }
+
+    .navbar.scrolled {
+        padding: 10px 0;
+    }
+
+    .nav-logo img {
+        height: 40px;
+    }
+
     .nav-menu {
         position: fixed;
         top: 0;
@@ -682,6 +711,8 @@ img {
         width: 80%;
         max-width: 320px;
         height: 100vh;
+        height: 100dvh;
+        /* Dynamic viewport height for mobile browsers */
         background: var(--white);
         flex-direction: column;
         justify-content: center;
@@ -694,8 +725,21 @@ img {
         right: 0;
     }
 
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
+    }
+
     .nav-menu a {
         font-size: 1.1rem;
+        display: block;
+        padding: 12px 0;
+    }
+
+    .nav-cta {
+        margin-top: 16px;
+        width: 100%;
+        text-align: center;
     }
 
     .nav-toggle {
@@ -715,14 +759,47 @@ img {
         transform: rotate(-45deg) translate(5px, -5px);
     }
 
-    /* Hero */
+    /* Hero - optimized for mobile viewport */
     .hero {
-        padding: 120px 24px 80px;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 100px 20px 60px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero h1 {
+        margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin: 0 auto 24px;
+        line-height: 1.6;
     }
 
     .hero-stats {
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
+        margin-bottom: 24px;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+        max-width: 180px;
     }
 
     .stat-divider {
@@ -730,37 +807,224 @@ img {
         height: 1px;
     }
 
-    /* About */
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    /* Buttons - touch friendly */
+    .btn {
+        padding: 14px 28px;
+        font-size: 0.95rem;
+        width: 100%;
+        max-width: 280px;
     }
 
-    .about-image {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    /* Services */
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Approach */
-    .approach-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-}
-
-@media (max-width: 480px) {
     .btn-large {
         padding: 16px 32px;
         font-size: 1rem;
     }
 
-    .service-card,
+    /* About */
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .about-image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .about-image::before {
+        top: -12px;
+        left: -12px;
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .about-content h2 {
+        margin-bottom: 16px;
+    }
+
+    .about-content p {
+        font-size: 1rem;
+    }
+
+    .focus-statement {
+        padding: 16px 20px;
+        font-size: 0.95rem;
+    }
+
+    /* Section headers */
+    .section-header {
+        margin: 0 auto 40px;
+    }
+
+    .section-tag {
+        font-size: 0.75rem;
+        margin-bottom: 12px;
+    }
+
+    /* Services */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 28px 24px;
+    }
+
+    .service-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 16px;
+    }
+
+    .service-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .service-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .service-card p {
+        font-size: 0.9rem;
+    }
+
+    .services-note {
+        font-size: 0.95rem;
+        margin-top: 32px;
+        padding: 0 16px;
+    }
+
+    /* Approach */
+    .approach-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
     .approach-card {
         padding: 32px 24px;
+    }
+
+    .approach-number {
+        font-size: 3rem;
+        margin-bottom: 8px;
+    }
+
+    .approach-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 12px;
+    }
+
+    .approach-card p {
+        font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact {
+        padding: var(--section-padding) 0;
+    }
+
+    .contact-content {
+        padding: 0 8px;
+    }
+
+    .contact h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-details {
+        margin-top: 32px;
+        gap: 12px;
+    }
+
+    .contact-item {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 0.9rem;
+    }
+
+    .contact-icon {
+        font-size: 1.1rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 32px 0;
+    }
+
+    .footer-logo {
+        max-height: 60px;
+    }
+
+    .footer p {
+        font-size: 0.85rem;
+    }
+
+    .copyright {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --section-padding: 48px;
+    }
+
+    .hero {
+        padding: 90px 16px 48px;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        max-width: 100%;
+    }
+
+    .about-image {
+        max-width: 260px;
+    }
+
+    .service-card,
+    .approach-card {
+        padding: 24px 20px;
+    }
+
+    .contact-item {
+        font-size: 0.85rem;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+
+    .service-card:hover,
+    .btn-primary:hover {
+        transform: none;
+    }
+
+    .nav-menu a,
+    .contact-item a {
+        padding: 16px 0;
+    }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: max(0px)) {
+    .navbar {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+
+    .footer {
+        padding-bottom: max(32px, env(safe-area-inset-bottom));
     }
 }
