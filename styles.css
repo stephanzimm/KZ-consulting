@@ -475,9 +475,15 @@ img {
 
 .career-logo-multi {
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
     height: auto;
     padding: 10px 8px;
+}
+
+.career-logo-multi img {
+    max-width: 60px;
+    max-height: 24px;
+    object-fit: contain;
 }
 
 .company-badge {
@@ -587,6 +593,12 @@ img {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.education-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
 }
 
 .education-item {
@@ -1174,6 +1186,10 @@ img {
     .education-item img {
         width: 35px;
         height: 28px;
+    }
+
+    .education-two-col {
+        grid-template-columns: 1fr;
     }
 
     /* Services */
