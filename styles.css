@@ -78,7 +78,7 @@ h6 {
 }
 
 h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
 }
 
@@ -409,6 +409,217 @@ img {
 }
 
 /* ========================================
+   Experience Section
+   ======================================== */
+
+.experience {
+    padding: 80px 0 60px;
+    background: var(--gray-50);
+}
+
+.experience .section-header {
+    margin-bottom: 32px;
+}
+
+.experience-title {
+    font-size: clamp(1.4rem, 3vw, 1.75rem);
+}
+
+.section-subtitle {
+    color: var(--gray-500);
+    font-size: 0.95rem;
+    margin-top: 4px;
+}
+
+/* Career Timeline */
+.career-timeline {
+    max-width: 1000px;
+    margin: 0 auto 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.career-item {
+    display: flex;
+    gap: 24px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+    border: 1px solid var(--gray-100);
+}
+
+.career-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.career-logo {
+    flex-shrink: 0;
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.career-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.career-logo-multi {
+    flex-direction: column;
+    gap: 6px;
+    height: auto;
+    padding: 10px 8px;
+}
+
+.company-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--gray-100);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--navy-dark);
+    letter-spacing: 0.02em;
+}
+
+.career-content {
+    flex: 1;
+}
+
+.career-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.career-company {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--navy-dark);
+    margin: 0;
+}
+
+.career-duration {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    background: var(--gradient-primary);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 100px;
+}
+
+.career-role {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.career-role strong {
+    color: var(--gray-700);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.career-period {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+
+.career-location {
+    font-size: 0.85rem;
+    color: var(--teal);
+    margin: 0 0 6px 0;
+    font-weight: 500;
+}
+
+.career-highlights {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.career-highlights li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 0.85rem;
+    color: var(--gray-500);
+    line-height: 1.4;
+}
+
+.career-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 6px;
+    height: 6px;
+    background: var(--teal-light);
+    border-radius: 50%;
+}
+
+/* Education Inline (in grid) */
+.career-item-education {
+    padding: 16px 20px;
+}
+
+.career-item-education .career-header {
+    margin-bottom: 12px;
+}
+
+.education-inline {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.education-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.education-item img {
+    width: 40px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.education-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.education-item strong {
+    font-size: 0.85rem;
+    color: var(--navy-dark);
+    font-weight: 600;
+}
+
+.education-item span {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+}
+
+/* ========================================
    Services Section
    ======================================== */
 
@@ -665,6 +876,26 @@ img {
     transition-delay: 0.5s;
 }
 
+.career-item.reveal:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.career-item.reveal:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.career-item.reveal:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.education-card.reveal:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.education-card.reveal:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
 .approach-card.reveal:nth-child(1) {
     transition-delay: 0s;
 }
@@ -706,7 +937,7 @@ img {
     }
 
     h1 {
-        font-size: clamp(1.75rem, 7vw, 2.5rem);
+        font-size: clamp(1.5rem, 6vw, 2rem);
     }
 
     h2 {
@@ -887,6 +1118,64 @@ img {
         margin-bottom: 12px;
     }
 
+    /* Experience */
+    .experience {
+        padding: 48px 0 40px;
+    }
+
+    .experience .section-header {
+        margin-bottom: 28px;
+    }
+
+    .career-timeline {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .career-item {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .career-logo {
+        width: 60px;
+        height: 45px;
+        margin: 0 auto;
+    }
+
+    .career-logo-multi {
+        width: auto;
+        flex-direction: row;
+        gap: 8px;
+        margin: 0 auto;
+    }
+
+    .career-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .career-company {
+        font-size: 1.1rem;
+    }
+
+    .career-role {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .career-role strong {
+        font-size: 0.9rem;
+    }
+
+    .education-item img {
+        width: 35px;
+        height: 28px;
+    }
+
     /* Services */
     .services-grid {
         grid-template-columns: 1fr;
@@ -1004,7 +1293,7 @@ img {
     }
 
     .hero h1 {
-        font-size: 1.6rem;
+        font-size: 1.35rem;
     }
 
     .hero-subtitle {

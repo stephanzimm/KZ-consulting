@@ -64,12 +64,106 @@
                 <div class="about-content">
                     <span class="section-tag">Who We Are</span>
                     <h2>Enabling Sustainable Performance</h2>
-                    <p>Karel Zimmermann Consulting supports companies in improving performance by designing strategies,
-                        structures and execution models that endure.</p>
+                    <p>Karel Zimmermann Consulting supports companies in improving performance by designing <strong>strategies</strong>,
+                        <strong>structures</strong> and <strong>execution models</strong> that endure.</p>
                     <p>With broad international management experience across industries and geographies, we work as a
                         trusted partner to leadership teams navigating opportunities and challenges.</p>
                     <p class="focus-statement"><strong>Our focus is simple:</strong> clarity, ownership, and measurable
                         outcomes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Background</span>
+                <h2 class="experience-title">30+ years of executive leadership across global food & healthcare industries</h2>
+                <p class="section-subtitle">Leading teams in Belgium, France, Canada, USA & Netherlands</p>
+            </div>
+
+            <!-- Career & Education Grid -->
+            <div class="career-timeline">
+                <!-- Cargill -->
+                <div class="career-item">
+                    <div class="career-logo">
+                        <img src="logos/cargill-logo.png" alt="Cargill">
+                    </div>
+                    <div class="career-content">
+                        <div class="career-header">
+                            <h3 class="career-company">Cargill</h3>
+                            <span class="career-duration">6 yrs</span>
+                        </div>
+                        <div class="career-role">
+                            <strong>Managing Director – Protein Europe</strong>
+                            <span class="career-period">2019 – 2025</span>
+                        </div>
+                        <p class="career-location">Netherlands</p>
+                    </div>
+                </div>
+
+                <!-- Puratos -->
+                <div class="career-item">
+                    <div class="career-logo">
+                        <img src="logos/puratos-logo.svg" alt="Puratos">
+                    </div>
+                    <div class="career-content">
+                        <div class="career-header">
+                            <h3 class="career-company">Puratos</h3>
+                            <span class="career-duration">23 yrs</span>
+                        </div>
+                        <div class="career-role">
+                            <strong>President North America & Global Exec Committee</strong>
+                            <span class="career-period">1995 – 2018</span>
+                        </div>
+                        <p class="career-location">Cherry Hill, NJ, USA</p>
+                    </div>
+                </div>
+
+                <!-- Earlier Career -->
+                <div class="career-item">
+                    <div class="career-logo career-logo-multi">
+                        <span class="company-badge">3M</span>
+                        <span class="company-badge">BD</span>
+                    </div>
+                    <div class="career-content">
+                        <div class="career-header">
+                            <h3 class="career-company">Earlier Career</h3>
+                            <span class="career-duration">6 yrs</span>
+                        </div>
+                        <div class="career-role">
+                            <strong>Sales & Marketing Director – Medical</strong>
+                            <span class="career-period">1989 – 1995</span>
+                        </div>
+                        <p class="career-location">Brussels, Belgium</p>
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="career-item career-item-education">
+                    <div class="career-content">
+                        <div class="career-header">
+                            <h3 class="career-company">Education</h3>
+                        </div>
+                        <div class="education-inline">
+                            <div class="education-item">
+                                <img src="logos/insead-logo.png" alt="INSEAD">
+                                <div>
+                                    <strong>INSEAD</strong>
+                                    <span>Digital Disruption Strategy</span>
+                                </div>
+                            </div>
+                            <div class="education-item">
+                                <img src="logos/vlerick-logo.png" alt="Vlerick">
+                                <div>
+                                    <strong>Vlerick Business School</strong>
+                                    <span>Advanced Management Program</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,7 +174,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">What We Do</span>
-                <h2>We help organizations through these core services</h2>
+                <h2>We help organizations through these 6 core services</h2>
             </div>
             <div class="services-grid">
                 <div class="service-card">
@@ -279,7 +373,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .approach-card, .about-content, .about-image').forEach(el => {
+        document.querySelectorAll('.service-card, .approach-card, .about-content, .about-image, .career-item').forEach(el => {
             el.classList.add('reveal');
             observer.observe(el);
         });
