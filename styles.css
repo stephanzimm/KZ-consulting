@@ -759,7 +759,12 @@ img {
 
 .perspectives-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    /* auto-fit + minmax keeps 3 columns filling the row once there are
+       enough cards (min 320px, matching the 3-column math at the
+       container's max-width), but collapses to fewer centered columns
+       today, while there's only a single placeholder card. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 363px));
+    justify-content: center;
     gap: 32px;
 }
 
@@ -1012,6 +1017,18 @@ img {
     transition-delay: 0.3s;
 }
 
+.perspective-card.reveal:nth-child(4) {
+    transition-delay: 0.45s;
+}
+
+.perspective-card.reveal:nth-child(5) {
+    transition-delay: 0.6s;
+}
+
+.perspective-card.reveal:nth-child(6) {
+    transition-delay: 0.75s;
+}
+
 /* ========================================
    Responsive Design
    ======================================== */
@@ -1025,8 +1042,32 @@ img {
         grid-template-columns: repeat(2, 1fr);
     }
 
+    .perspectives-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .about-grid {
         gap: 48px;
+    }
+
+    /* Navigation - prevent wrapping once the 5th nav item (Perspectives)
+       is added; hamburger menu doesn't kick in until 768px, so the
+       horizontal nav needs to be compact enough to fit 5 items + logo
+       down to 769px viewport width. */
+    .nav-logo {
+        font-size: 1.05rem;
+    }
+
+    .nav-menu {
+        gap: 16px;
+    }
+
+    .nav-menu a {
+        font-size: 0.82rem;
+    }
+
+    .nav-cta {
+        padding: 8px 14px;
     }
 }
 
@@ -1300,12 +1341,14 @@ img {
         height: 24px;
     }
 
-    .service-card h3 {
+    .service-card h3,
+    .perspective-card h3 {
         font-size: 1.1rem;
         margin-bottom: 8px;
     }
 
-    .service-card p {
+    .service-card p,
+    .perspective-card p {
         font-size: 0.9rem;
     }
 
@@ -1422,7 +1465,8 @@ img {
     }
 
     .service-card,
-    .approach-card {
+    .approach-card,
+    .perspective-card {
         padding: 24px 20px;
     }
 
@@ -1435,6 +1479,7 @@ img {
 @media (hover: none) and (pointer: coarse) {
 
     .service-card:hover,
+    .perspective-card:hover,
     .btn-primary:hover {
         transform: none;
     }
