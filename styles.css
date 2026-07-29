@@ -400,12 +400,19 @@ img {
     font-size: 1.1rem;
 }
 
-.focus-statement {
-    margin-top: 24px;
-    padding: 20px 24px;
-    background: var(--gray-50);
-    border-left: 4px solid var(--teal);
-    border-radius: 0 8px 8px 0;
+.about-points {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    margin-top: 8px;
+}
+
+.about-point h3 {
+    margin-bottom: 8px;
+}
+
+.about-point p {
+    margin-bottom: 0;
 }
 
 /* ========================================
@@ -1115,11 +1122,6 @@ img {
 
     .about-content p {
         font-size: 1rem;
-    }
-
-    .focus-statement {
-        padding: 16px 20px;
-        font-size: 0.95rem;
     }
 
     /* Section headers */
