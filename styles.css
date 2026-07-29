@@ -279,8 +279,12 @@ img {
     font-size: 1.15rem;
     color: var(--gray-500);
     max-width: 700px;
-    margin: 0 auto 32px;
+    margin: 0 auto 16px;
     line-height: 1.7;
+}
+
+.hero-subtitle:last-of-type {
+    margin-bottom: 32px;
 }
 
 .hero-stats {
@@ -1179,8 +1183,12 @@ img {
 
     .hero-subtitle {
         font-size: 1rem;
-        margin: 0 auto 24px;
+        margin: 0 auto 12px;
         line-height: 1.6;
+    }
+
+    .hero-subtitle:last-of-type {
+        margin-bottom: 24px;
     }
 
     .hero-stats {
