@@ -186,3 +186,29 @@ test('loads the Perspective module and starts it with the page observer', () => 
     assert.match(html, /Perspectives\.loadPerspectives\(\{/);
     assert.match(html, /observer\s*\n\s*\}\);/);
 });
+
+test('defines the Pages CMS Perspective schema and an empty JSON data file', () => {
+    const projectRoot = path.join(__dirname, '..');
+    const configPath = path.join(projectRoot, '.pages.yml');
+    const dataPath = path.join(projectRoot, 'perspectives.json');
+
+    assert.ok(fs.existsSync(configPath), '.pages.yml should exist');
+    assert.ok(fs.existsSync(dataPath), 'perspectives.json should exist');
+
+    const config = fs.readFileSync(configPath, 'utf8');
+    const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+
+    assert.match(config, /input: perspectives/);
+    assert.match(config, /output: \/perspectives/);
+    assert.match(config, /rename: safe/);
+    assert.equal((config.match(/extensions: \[pdf\]/g) || []).length, 2);
+    assert.match(config, /path: perspectives\.json/);
+    assert.match(config, /format: json/);
+    assert.match(config, /list: true/);
+
+    for (const field of ['date', 'title', 'summary', 'pdf']) {
+        assert.match(config, new RegExp(`- name: ${field}`));
+    }
+
+    assert.deepEqual(data, []);
+});

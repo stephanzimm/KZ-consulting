@@ -1,0 +1,47 @@
+media:
+  - name: perspective-pdfs
+    label: Perspective PDFs
+    input: perspectives
+    output: /perspectives
+    extensions: [pdf]
+    rename: safe
+
+content:
+  - name: perspectives
+    label: Perspectives
+    type: file
+    path: perspectives.json
+    format: json
+    list: true
+    fields:
+      - name: date
+        label: Publication date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: title
+        label: Title
+        type: string
+        required: true
+        options:
+          maxlength: 120
+      - name: summary
+        label: Teaser
+        type: text
+        required: true
+        options:
+          minlength: 20
+          maxlength: 280
+      - name: pdf
+        label: PDF
+        type: file
+        required: true
+        options:
+          media: perspective-pdfs
+          extensions: [pdf]
+
+settings:
+  hide: true
+  commit:
+    identity: user
