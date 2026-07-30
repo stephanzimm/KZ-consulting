@@ -1,18 +1,21 @@
-# Adding a new Perspective
+# Publishing a Perspective
 
-1. Save the PDF here, named like `2026-08-example-slug.pdf` (year-month-short-title).
-2. In `index.html`, find the `.perspectives-grid` div and copy this card as the
-   **first** child (newest first):
+Perspectives are managed through the hosted Pages CMS editor.
 
-   ```html
-   <div class="perspective-card">
-       <span class="perspective-date">August 2026</span>
-       <h3>Title of the Perspective</h3>
-       <p>One to two sentence teaser describing what this Perspective covers.</p>
-       <a href="perspectives/2026-08-example-slug.pdf" class="perspective-link"
-           target="_blank" rel="noopener noreferrer">Download PDF →</a>
-   </div>
-   ```
-3. Edit the date, title, teaser, and `href` to match the new PDF.
-4. The first time you do this, delete the placeholder card
-   (`perspective-card--placeholder`) already in the grid.
+## One-time repository setup
+
+1. Sign in at `https://app.pagescms.org` with the GitHub account that owns this repository.
+2. Install the Pages CMS GitHub App and grant it access to `KZ-consulting`.
+3. Open the repository's `main` branch in Pages CMS.
+4. Invite Karel as a collaborator by email if he will not use a GitHub account.
+
+## Publishing
+
+1. Open **Perspectives** in Pages CMS.
+2. Add an item and enter its publication date, title, and teaser.
+3. Select or upload its PDF.
+4. Save the entry.
+
+Pages CMS writes the metadata to `perspectives.json` and stores the uploaded PDF
+in this directory. The website sorts entries newest first, and Vercel deploys
+the saved commit automatically.
