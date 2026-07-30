@@ -375,6 +375,7 @@
         </div>
     </footer>
 
+    <script src="perspectives.js"></script>
     <script>
         // Mobile Navigation Toggle
         const navToggle = document.querySelector('.nav-toggle');
@@ -434,6 +435,14 @@
         document.querySelectorAll('.service-card, .approach-card, .perspective-card, .about-content, .about-image, .career-item').forEach(el => {
             el.classList.add('reveal');
             observer.observe(el);
+        });
+
+        Perspectives.loadPerspectives({
+            document,
+            grid: document.querySelector('.perspectives-grid'),
+            fetch: window.fetch.bind(window),
+            onError: error => console.error('Unable to load Perspectives:', error),
+            observer
         });
     </script>
 </body>
