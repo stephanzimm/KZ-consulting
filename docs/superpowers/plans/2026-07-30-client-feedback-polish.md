@@ -91,4 +91,3 @@ Serve the repository locally and inspect the page at `1440x900`, `1024x768`, and
 git add index.html styles.css docs/superpowers/specs/2026-07-30-client-feedback-polish-design.md docs/superpowers/plans/2026-07-30-client-feedback-polish.md
 git commit -m "Apply final client content feedback"
 ```
-

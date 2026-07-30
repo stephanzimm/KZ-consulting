@@ -28,4 +28,3 @@ Keep module 5's reference to "disciplined execution." Change module 6's descript
 - Do not change the mobile hero spacing.
 - Do not alter other uses of "execution" elsewhere on the site.
 - Verify the hero at desktop and mobile viewport sizes before completion.
-
