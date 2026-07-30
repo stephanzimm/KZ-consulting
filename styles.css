@@ -262,6 +262,7 @@ img {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
+    transform: translateY(16px);
 }
 
 .hero h1 {
@@ -1182,6 +1183,7 @@ img {
 
     .hero-content {
         max-width: 100%;
+        transform: none;
     }
 
     .hero h1 {
