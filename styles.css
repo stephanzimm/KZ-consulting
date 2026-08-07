@@ -918,10 +918,58 @@ img {
     gap: 16px;
 }
 
-.footer-logo {
-    max-height: 120px;
+.footer-brand {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px 44px;
+}
+
+.footer-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-brand-mark {
+    height: 48px;
     width: auto;
-    opacity: 1;
+}
+
+.footer-brand-name {
+    font-size: 1.9rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--navy-dark);
+}
+
+.footer-brand-person {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+}
+
+.footer-brand-person::before,
+.footer-brand-person::after {
+    content: "";
+    width: 36px;
+    height: 1px;
+    background: var(--gray-300);
+}
+
+.footer-brand-tagline {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--teal);
 }
 
 .footer p {
@@ -1441,8 +1489,21 @@ img {
         padding: 32px 0;
     }
 
-    .footer-logo {
-        max-height: 100px;
+    .footer-brand {
+        padding: 22px 28px;
+    }
+
+    .footer-brand-mark {
+        height: 36px;
+    }
+
+    .footer-brand-name {
+        font-size: 1.4rem;
+    }
+
+    .footer-brand-person {
+        font-size: 0.7rem;
+        letter-spacing: 0.28em;
     }
 
     .footer p {
