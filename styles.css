@@ -1,5 +1,5 @@
 /* ========================================
-   KZ Advisory
+   Karel Zimmermann Consulting
    Brand Colors & Design System
    ======================================== */
 
@@ -918,58 +918,18 @@ img {
     gap: 16px;
 }
 
-.footer-brand {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    background: var(--white);
-    border-radius: 12px;
-    padding: 28px 44px;
-}
-
-.footer-brand-row {
+.footer-logo-wrapper {
+    width: 100%;
     display: flex;
-    align-items: center;
-    gap: 16px;
+    justify-content: center;
 }
 
-.footer-brand-mark {
-    height: 48px;
-    width: auto;
-}
-
-.footer-brand-name {
-    font-size: 1.9rem;
-    font-weight: 600;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--navy-dark);
-}
-
-.footer-brand-person {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--gray-500);
-}
-
-.footer-brand-person::before,
-.footer-brand-person::after {
-    content: "";
-    width: 36px;
-    height: 1px;
-    background: var(--gray-300);
-}
-
-.footer-brand-tagline {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--teal);
+.footer-logo {
+    display: block;
+    width: min(320px, 90vw);
+    height: auto;
+    object-fit: contain;
+    object-position: center;
 }
 
 .footer p {
@@ -1487,23 +1447,6 @@ img {
     /* Footer */
     .footer {
         padding: 32px 0;
-    }
-
-    .footer-brand {
-        padding: 22px 28px;
-    }
-
-    .footer-brand-mark {
-        height: 36px;
-    }
-
-    .footer-brand-name {
-        font-size: 1.4rem;
-    }
-
-    .footer-brand-person {
-        font-size: 0.7rem;
-        letter-spacing: 0.28em;
     }
 
     .footer p {
