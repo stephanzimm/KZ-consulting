@@ -33,7 +33,8 @@
                 date: typeof entry.date === 'string' ? entry.date.trim() : '',
                 title: typeof entry.title === 'string' ? entry.title.trim() : '',
                 summary: typeof entry.summary === 'string' ? entry.summary.trim() : '',
-                pdf: typeof entry.pdf === 'string' ? entry.pdf.trim() : ''
+                pdf: typeof entry.pdf === 'string' ? entry.pdf.trim() : '',
+                page: typeof entry.page === 'string' ? entry.page.trim() : ''
             }))
             .filter(entry => (
                 isValidDate(entry.date)
@@ -73,10 +74,10 @@
 
         const link = documentRef.createElement('a');
         link.className = 'perspective-link';
-        link.href = perspective.pdf;
+        link.href = perspective.page || perspective.pdf;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        link.textContent = 'Download PDF →';
+        link.textContent = perspective.page ? 'Read Perspective →' : 'Download PDF →';
 
         card.append(date, title, summary, link);
         return card;

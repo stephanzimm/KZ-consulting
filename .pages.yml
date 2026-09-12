@@ -40,6 +40,12 @@ content:
         options:
           media: perspective-pdfs
           extensions: [pdf]
+      - name: page
+        label: Readable web page
+        type: string
+        required: false
+        options:
+          maxlength: 200
 
 settings:
   hide: true
