@@ -187,7 +187,7 @@ test('loads the Perspective module and starts it with the page observer', () => 
     assert.match(html, /observer\s*\n\s*\}\);/);
 });
 
-test('defines the Pages CMS Perspective schema and an empty JSON data file', () => {
+test('defines the Pages CMS Perspective schema and published Perspective data', () => {
     const projectRoot = path.join(__dirname, '..');
     const configPath = path.join(projectRoot, '.pages.yml');
     const dataPath = path.join(projectRoot, 'perspectives.json');
@@ -206,9 +206,12 @@ test('defines the Pages CMS Perspective schema and an empty JSON data file', () 
     assert.match(config, /format: json/);
     assert.match(config, /list: true/);
 
-    for (const field of ['date', 'title', 'summary', 'pdf']) {
+    for (const field of ['date', 'title', 'summary', 'pdf', 'page']) {
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.deepEqual(data, []);
+    assert.equal(data.length, 1);
+    assert.equal(data[0].title, 'Beyond IQ and EQ: Is there a Missing Dimension?');
+    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-01-beyond-iq-and-eq.pdf');
+    assert.equal(data[0].page, '/perspectives/beyond-iq-and-eq.html');
 });
