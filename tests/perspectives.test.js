@@ -210,8 +210,8 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.equal(data.length, 1);
-    assert.equal(data[0].title, 'Beyond IQ and EQ: Is there a Missing Dimension?');
-    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-01-beyond-iq-and-eq.pdf');
-    assert.equal(data[0].page, '/perspectives/beyond-iq-and-eq.html');
+    assert.equal(data.length, 2);
+    assert.equal(data[0].title, 'The Lost Art of Simplicity');
+    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-02-the-lost-art-of-simplicity.pdf');
+    assert.equal(data[0].page, '/perspectives/the-lost-art-of-simplicity.html');
 });
