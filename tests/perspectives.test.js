@@ -216,4 +216,3 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
     assert.equal(data[1].title, 'The Lost Art of Simplicity');
     assert.equal(data[1].page, '/perspectives/the-lost-art-of-simplicity.html');
 });
-});
