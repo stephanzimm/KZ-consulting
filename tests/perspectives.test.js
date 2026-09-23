@@ -213,6 +213,7 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
     assert.equal(data.length, 3);
     assert.equal(data[0].title, 'Where Strategy meets the Market');
     assert.equal(data[0].pdf, '/perspectives/2026-09-where-strategy-meets-the-market.pdf');
+    assert.equal(data[0].page, '/perspectives/where-strategy-meets-the-market.html');
     assert.equal(data[1].title, 'The Lost Art of Simplicity');
     assert.equal(data[1].page, '/perspectives/the-lost-art-of-simplicity.html');
 });
