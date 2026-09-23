@@ -210,8 +210,10 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.equal(data.length, 2);
-    assert.equal(data[0].title, 'The Lost Art of Simplicity');
-    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-02-the-lost-art-of-simplicity.pdf');
-    assert.equal(data[0].page, '/perspectives/the-lost-art-of-simplicity.html');
+    assert.equal(data.length, 3);
+    assert.equal(data[0].title, 'Where Strategy meets the Market');
+    assert.equal(data[0].pdf, '/perspectives/2026-09-where-strategy-meets-the-market.pdf');
+    assert.equal(data[1].title, 'The Lost Art of Simplicity');
+    assert.equal(data[1].page, '/perspectives/the-lost-art-of-simplicity.html');
+});
 });
