@@ -100,12 +100,52 @@ test('creates a card with literal text and a protected PDF link', () => {
     assert.equal(card.children[3].textContent, 'Download PDF →');
 });
 
-test('loads valid perspectives into the grid and observes each card', async () => {
+test('creates distinct featured and recent Perspective treatments', () => {
+    assert.equal(typeof Perspectives.createFeaturedPerspective, 'function');
+    assert.equal(typeof Perspectives.createRecentPerspective, 'function');
+
+    const perspective = {
+        date: '2026-10-05',
+        title: 'Latest perspective',
+        summary: 'A sufficiently detailed summary for the latest perspective.',
+        pdf: '/perspectives/latest.pdf',
+        page: '/perspectives/latest.html'
+    };
+    const featured = Perspectives.createFeaturedPerspective(createMockDocument(), perspective);
+    const recent = Perspectives.createRecentPerspective(createMockDocument(), perspective);
+
+    assert.equal(featured.className, 'perspective-feature');
+    assert.equal(featured.children[0].textContent, 'Latest Perspective');
+    assert.equal(featured.children[1].textContent, 'October 2026');
+    assert.equal(featured.children[2].textContent, 'Latest perspective');
+    assert.equal(featured.children[3].textContent, perspective.summary);
+    assert.equal(featured.children[4].href, perspective.page);
+    assert.equal(featured.children[4].textContent, 'Read Perspective →');
+
+    assert.equal(recent.className, 'perspective-recent-item');
+    assert.equal(recent.children[0].textContent, 'October 2026');
+    assert.equal(recent.children[1].textContent, 'Latest perspective');
+    assert.equal(recent.children[2].href, perspective.page);
+
+    const pdfOnlyRecent = Perspectives.createRecentPerspective(createMockDocument(), {
+        ...perspective,
+        page: ''
+    });
+
+    assert.equal(pdfOnlyRecent.children[2].textContent, 'Download PDF →');
+});
+
+test('loads the latest Perspective as a feature and limits the recent rail to three', async () => {
     assert.equal(typeof Perspectives.loadPerspectives, 'function');
 
-    const placeholder = { className: 'perspective-card--placeholder' };
-    const grid = {
-        children: [placeholder],
+    const featured = {
+        children: [{ className: 'perspective-feature--placeholder' }],
+        replaceChildren(...children) {
+            this.children = children;
+        }
+    };
+    const recent = {
+        children: [{ className: 'perspective-recent--placeholder' }],
         replaceChildren(...children) {
             this.children = children;
         }
@@ -120,42 +160,48 @@ test('loads valid perspectives into the grid and observes each card', async () =
         ok: true,
         async json() {
             return [
-                {
-                    date: '2026-06-01',
-                    title: 'First perspective',
-                    summary: 'A sufficiently detailed summary for the first perspective.',
-                    pdf: '/perspectives/first.pdf'
-                },
-                {
-                    date: '2026-09-01',
-                    title: 'Latest perspective',
-                    summary: 'A sufficiently detailed summary for the latest perspective.',
-                    pdf: '/perspectives/latest.pdf'
-                }
+                ...Array.from({ length: 5 }, (_, index) => ({
+                    date: `2026-0${index + 1}-01`,
+                    title: `Perspective ${index + 1}`,
+                    summary: `A sufficiently detailed summary for Perspective ${index + 1}.`,
+                    pdf: `/perspectives/perspective-${index + 1}.pdf`
+                }))
             ];
         }
     });
 
     const count = await Perspectives.loadPerspectives({
         document: createMockDocument(),
-        grid,
+        featured,
+        recent,
         fetch,
         observer
     });
 
-    assert.equal(count, 2);
-    assert.deepEqual(grid.children.map(card => card.children[1].textContent), [
-        'Latest perspective',
-        'First perspective'
+    assert.equal(count, 5);
+    assert.equal(featured.children.length, 1);
+    assert.equal(featured.children[0].children[2].textContent, 'Perspective 5');
+    assert.deepEqual(recent.children.map(item => item.children[1].textContent), [
+        'Perspective 4',
+        'Perspective 3',
+        'Perspective 2'
     ]);
-    assert.equal(observer.observed.length, 2);
-    assert.ok(grid.children.every(card => card.className.includes('reveal')));
+    assert.equal(observer.observed.length, 4);
+    assert.ok(featured.children[0].className.includes('reveal'));
+    assert.ok(recent.children.every(item => item.className.includes('reveal')));
 });
 
-test('keeps the placeholder when Perspective data cannot be loaded', async () => {
-    const placeholder = { className: 'perspective-card--placeholder' };
-    const grid = {
-        children: [placeholder],
+test('keeps homepage placeholders when Perspective data cannot be loaded', async () => {
+    const featuredPlaceholder = { className: 'perspective-feature--placeholder' };
+    const recentPlaceholder = { className: 'perspective-recent--placeholder' };
+    const featured = {
+        children: [featuredPlaceholder],
+        replaceChildren(...children) {
+            this.children = children;
+        }
+    };
+    const recent = {
+        children: [recentPlaceholder],
         replaceChildren(...children) {
             this.children = children;
         }
@@ -164,7 +210,8 @@ test('keeps the placeholder when Perspective data cannot be loaded', async () =>
 
     const count = await Perspectives.loadPerspectives({
         document: createMockDocument(),
-        grid,
+        featured,
+        recent,
         fetch: async () => {
             throw new Error('offline');
         },
@@ -175,16 +222,106 @@ test('keeps the placeholder when Perspective data cannot be loaded', async () =>
     });
 
     assert.equal(count, 0);
-    assert.equal(grid.children[0], placeholder);
+    assert.equal(featured.children[0], featuredPlaceholder);
+    assert.equal(recent.children[0], recentPlaceholder);
     assert.equal(reportedError.message, 'offline');
+});
+
+test('shows intentional homepage empty states for an empty collection', async () => {
+    const featured = {
+        children: [],
+        replaceChildren(...children) {
+            this.children = children;
+        }
+    };
+    const recent = {
+        children: [],
+        replaceChildren(...children) {
+            this.children = children;
+        }
+    };
+
+    const count = await Perspectives.loadPerspectives({
+        document: createMockDocument(),
+        featured,
+        recent,
+        fetch: async () => ({
+            ok: true,
+            async json() {
+                return [];
+            }
+        }),
+        observer: { observe() {} }
+    });
+
+    assert.equal(count, 0);
+    assert.equal(featured.children[0].children[1].textContent, 'More Perspectives are coming soon.');
+    assert.equal(recent.children[0].children[1].textContent, 'The collection will grow here.');
+});
+
+test('loads every valid Perspective into the archive', async () => {
+    assert.equal(typeof Perspectives.loadPerspectiveArchive, 'function');
+
+    const grid = {
+        children: [],
+        replaceChildren(...children) {
+            this.children = children;
+        }
+    };
+    const observer = { observe() {} };
+    const count = await Perspectives.loadPerspectiveArchive({
+        document: createMockDocument(),
+        grid,
+        fetch: async () => ({
+            ok: true,
+            async json() {
+                return [
+                    {
+                        date: '2026-08-01',
+                        title: 'Newest',
+                        summary: 'A sufficiently detailed summary for the newest item.',
+                        pdf: '/perspectives/newest.pdf'
+                    },
+                    {
+                        date: '2026-07-01',
+                        title: 'Older',
+                        summary: 'A sufficiently detailed summary for the older item.',
+                        pdf: '/perspectives/older.pdf'
+                    }
+                ];
+            }
+        }),
+        dataUrl: '../perspectives.json',
+        observer
+    });
+
+    assert.equal(count, 2);
+    assert.deepEqual(grid.children.map(card => card.children[1].textContent), ['Newest', 'Older']);
 });
 
 test('loads the Perspective module and starts it with the page observer', () => {
     const html = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
 
     assert.match(html, /<script src="perspectives\.js"><\/script>/);
+    assert.match(html, /class="perspective-feature-slot"/);
+    assert.match(html, /class="perspectives-recent-list"/);
+    assert.match(html, /href="perspectives\/"/);
     assert.match(html, /Perspectives\.loadPerspectives\(\{/);
-    assert.match(html, /observer\s*\n\s*\}\);/);
+    assert.match(html, /featured: document\.querySelector\('\.perspective-feature-slot'\)/);
+    assert.match(html, /recent: document\.querySelector\('\.perspectives-recent-list'\)/);
+});
+
+test('provides a dedicated Perspective archive page', () => {
+    const archivePath = path.join(__dirname, '..', 'perspectives', 'index.html');
+
+    assert.ok(fs.existsSync(archivePath), 'the Perspective archive page should exist');
+
+    const html = fs.readFileSync(archivePath, 'utf8');
+
+    assert.match(html, /<h1>Perspectives<\/h1>/);
+    assert.match(html, /<script src="\.\.\/perspectives\.js"><\/script>/);
+    assert.match(html, /Perspectives\.loadPerspectiveArchive\(\{/);
+    assert.match(html, /dataUrl: '\.\.\/perspectives\.json'/);
 });
 
 test('defines the Pages CMS Perspective schema and published Perspective data', () => {
