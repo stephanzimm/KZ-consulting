@@ -751,20 +751,19 @@ img {
    ======================================== */
 
 .perspectives {
-    padding: var(--section-padding) 0;
+    padding: 88px 0;
     background: var(--gray-50);
 }
 
 .perspectives .section-header {
     max-width: 780px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto 42px;
 }
 
 .perspectives-showcase {
     display: grid;
     grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.85fr);
-    gap: 28px;
+    gap: 24px;
     align-items: stretch;
 }
 
@@ -773,9 +772,9 @@ img {
 }
 
 .perspective-feature {
-    min-height: 480px;
+    min-height: 410px;
     height: 100%;
-    padding: clamp(36px, 5vw, 64px);
+    padding: clamp(32px, 3.5vw, 44px);
     border-radius: 24px;
     display: flex;
     flex-direction: column;
@@ -819,26 +818,26 @@ img {
 .perspective-feature h3 {
     max-width: 680px;
     margin-top: auto;
-    padding-top: 72px;
+    padding-top: 44px;
     color: var(--white);
-    font-size: clamp(2rem, 4.2vw, 3.65rem);
+    font-size: clamp(1.9rem, 3.6vw, 3.2rem);
     line-height: 1.08;
     letter-spacing: -0.035em;
 }
 
 .perspective-feature p {
     max-width: 660px;
-    margin: 20px 0 28px;
+    margin: 14px 0 22px;
     color: rgba(255, 255, 255, 0.78);
-    font-size: 1.05rem;
-    line-height: 1.72;
+    font-size: 1rem;
+    line-height: 1.62;
 }
 
 .perspective-feature-link {
     display: inline-flex;
     align-items: center;
-    min-height: 48px;
-    padding: 12px 18px;
+    min-height: 44px;
+    padding: 10px 16px;
     border-radius: 8px;
     background: var(--white);
     color: var(--navy-dark);
@@ -858,7 +857,7 @@ img {
 }
 
 .perspectives-recent {
-    padding: 30px 30px 20px;
+    padding: 26px 26px 14px;
     border: 1px solid var(--gray-200);
     border-radius: 24px;
     background: var(--white);
@@ -870,7 +869,7 @@ img {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    padding-bottom: 18px;
+    padding-bottom: 14px;
     border-bottom: 1px solid var(--gray-200);
 }
 
@@ -888,7 +887,7 @@ img {
 }
 
 .perspective-recent-item {
-    padding: 23px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--gray-200);
     transition: transform var(--transition-fast);
 }
@@ -906,7 +905,7 @@ img {
 }
 
 .perspective-recent-item h3 {
-    margin: 7px 0 8px;
+    margin: 5px 0 6px;
     font-size: 1.08rem;
     line-height: 1.35;
 }
@@ -991,7 +990,7 @@ img {
 
 .archive-nav {
     width: min(100% - 48px, var(--container-max));
-    min-height: 76px;
+    min-height: 68px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -1012,7 +1011,7 @@ img {
 }
 
 .archive-hero {
-    padding: 88px 0 76px;
+    padding: 64px 0 56px;
     background:
         radial-gradient(circle at 82% 20%, rgba(72, 181, 196, 0.24), transparent 28%),
         var(--navy-dark);
@@ -1023,9 +1022,9 @@ img {
 }
 
 .archive-hero h1 {
-    margin: 12px 0 18px;
+    margin: 8px 0 12px;
     color: var(--white);
-    font-size: clamp(2.75rem, 7vw, 5.4rem);
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
     letter-spacing: -0.045em;
 }
 
@@ -1037,7 +1036,7 @@ img {
 }
 
 .archive-content {
-    padding: 72px 0 96px;
+    padding: 56px 0 72px;
 }
 
 .archive-intro {
@@ -1045,7 +1044,7 @@ img {
     justify-content: space-between;
     align-items: end;
     gap: 32px;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .archive-intro h2 {
@@ -1061,11 +1060,12 @@ img {
 .perspective-archive-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    gap: 20px;
 }
 
 .perspectives-archive-page .perspective-card {
-    min-height: 290px;
+    min-height: 240px;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     border: 1px solid var(--gray-200);
@@ -1347,8 +1347,17 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .perspectives {
+        padding: 72px 0;
+    }
+
     .perspective-feature {
-        min-height: 430px;
+        min-height: 390px;
+        padding: 36px;
+    }
+
+    .perspective-feature h3 {
+        padding-top: 40px;
     }
 
     .perspectives-recent-list {
@@ -1357,7 +1366,7 @@ img {
     }
 
     .perspective-recent-item {
-        padding: 22px 20px;
+        padding: 18px 18px;
         border-right: 1px solid var(--gray-200);
         border-bottom: 0;
     }
@@ -1709,17 +1718,21 @@ img {
     }
 
     /* Perspectives */
+    .perspectives {
+        padding: 52px 0;
+    }
+
     .perspective-feature {
-        min-height: 420px;
-        padding: 34px 28px;
+        min-height: 0;
+        padding: 28px 24px;
     }
 
     .perspective-feature h3 {
-        padding-top: 64px;
+        padding-top: 36px;
     }
 
     .perspectives-recent {
-        padding: 28px 26px 16px;
+        padding: 24px 22px 10px;
     }
 
     .perspectives-recent-header .perspectives-archive-link {
@@ -1733,7 +1746,7 @@ img {
     .perspective-recent-item,
     .perspective-recent-item:first-child,
     .perspective-recent-item:last-child {
-        padding: 20px 0;
+        padding: 16px 0;
         border-right: 0;
         border-bottom: 1px solid var(--gray-200);
     }
@@ -1757,11 +1770,11 @@ img {
     }
 
     .archive-hero {
-        padding: 64px 0 58px;
+        padding: 48px 0 42px;
     }
 
     .archive-content {
-        padding: 56px 0 72px;
+        padding: 44px 0 56px;
     }
 
     .archive-intro {
@@ -1777,6 +1790,7 @@ img {
 
     .perspectives-archive-page .perspective-card {
         min-height: 0;
+        padding: 24px;
     }
 
     /* Contact */
@@ -1837,6 +1851,10 @@ img {
         --section-padding: 48px;
     }
 
+    .perspectives {
+        padding: 44px 0;
+    }
+
     .hero {
         padding: 90px 16px 48px;
     }
@@ -1864,20 +1882,21 @@ img {
     }
 
     .perspective-feature {
-        min-height: 390px;
-        padding: 28px 24px;
+        min-height: 0;
+        padding: 24px 20px;
     }
 
     .perspective-feature h3 {
-        padding-top: 52px;
+        padding-top: 32px;
     }
 
     .perspective-feature p {
-        font-size: 0.95rem;
+        margin: 12px 0 18px;
+        font-size: 0.92rem;
     }
 
     .perspectives-recent {
-        padding: 24px 22px 12px;
+        padding: 20px 18px 8px;
     }
 
     .archive-logo {
