@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Perspectives from Karel Zimmermann on strategy, performance, leadership and transformation.">
+    <title>Perspectives | Karel Zimmermann Consulting</title>
+    <link rel="canonical" href="https://www.karelzimmermannconsulting.com/perspectives/">
+    <meta property="og:site_name" content="Karel Zimmermann Consulting">
+    <meta property="og:title" content="Perspectives | Karel Zimmermann Consulting">
+    <meta property="og:description"
+        content="Short, practical reflections on strategy, performance, leadership and transformation.">
+    <meta property="og:url" content="https://www.karelzimmermannconsulting.com/perspectives/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="../kz-icon.png">
+</head>
+
+<body class="perspectives-archive-page">
+    <header class="archive-header">
+        <nav class="archive-nav" aria-label="Archive navigation">
+            <a href="../index.html" class="archive-logo">Karel Zimmermann Consulting</a>
+            <a href="../index.html#perspectives" class="archive-back">← Back to website</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="archive-hero">
+            <div class="container">
+                <span class="section-tag">Ideas from experience</span>
+                <h1>Perspectives</h1>
+                <p>Short, practical reflections on the leadership choices behind strategy, performance and
+                    transformation.</p>
+            </div>
+        </section>
+
+        <section class="archive-content" aria-labelledby="archive-title">
+            <div class="container">
+                <div class="archive-intro">
+                    <h2 id="archive-title">All Perspectives</h2>
+                    <p>The complete collection, with the newest thinking first.</p>
+                </div>
+                <div class="perspective-archive-grid">
+                    <div class="perspective-card perspective-card--placeholder">
+                        <span class="perspective-date">Loading</span>
+                        <h3>Gathering the Perspective archive…</h3>
+                        <p>The complete collection will appear here.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="archive-footer">© 2026 Karel Zimmermann Consulting. All rights reserved.</footer>
+
+    <script src="../perspectives.js"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        Perspectives.loadPerspectiveArchive({
+            document,
+            grid: document.querySelector('.perspective-archive-grid'),
+            fetch: window.fetch.bind(window),
+            dataUrl: '../perspectives.json',
+            onError: error => console.error('Unable to load the Perspective archive:', error),
+            observer
+        });
+    </script>
+</body>
+
+</html>

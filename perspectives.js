@@ -58,6 +58,16 @@
         }).format(date);
     }
 
+    function createPerspectiveLink(documentRef, perspective, className, label) {
+        const link = documentRef.createElement('a');
+        link.className = className;
+        link.href = perspective.page || perspective.pdf;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = label || (perspective.page ? 'Read Perspective →' : 'Download PDF →');
+        return link;
+    }
+
     function createPerspectiveCard(documentRef, perspective) {
         const card = documentRef.createElement('div');
         card.className = 'perspective-card';
@@ -72,38 +82,177 @@
         const summary = documentRef.createElement('p');
         summary.textContent = perspective.summary;
 
-        const link = documentRef.createElement('a');
-        link.className = 'perspective-link';
-        link.href = perspective.page || perspective.pdf;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.textContent = perspective.page ? 'Read Perspective →' : 'Download PDF →';
+        const link = createPerspectiveLink(documentRef, perspective, 'perspective-link');
 
         card.append(date, title, summary, link);
         return card;
     }
 
+    function createFeaturedPerspective(documentRef, perspective) {
+        const feature = documentRef.createElement('article');
+        feature.className = 'perspective-feature';
+
+        const label = documentRef.createElement('span');
+        label.className = 'perspective-feature-label';
+        label.textContent = 'Latest Perspective';
+
+        const date = documentRef.createElement('span');
+        date.className = 'perspective-feature-date';
+        date.textContent = formatPerspectiveDate(perspective.date);
+
+        const title = documentRef.createElement('h3');
+        title.textContent = perspective.title;
+
+        const summary = documentRef.createElement('p');
+        summary.textContent = perspective.summary;
+
+        const link = createPerspectiveLink(
+            documentRef,
+            perspective,
+            'perspective-feature-link',
+            perspective.page ? 'Read Perspective →' : 'Download PDF →'
+        );
+
+        feature.append(label, date, title, summary, link);
+        return feature;
+    }
+
+    function createRecentPerspective(documentRef, perspective) {
+        const item = documentRef.createElement('article');
+        item.className = 'perspective-recent-item';
+
+        const date = documentRef.createElement('span');
+        date.className = 'perspective-recent-date';
+        date.textContent = formatPerspectiveDate(perspective.date);
+
+        const title = documentRef.createElement('h3');
+        title.textContent = perspective.title;
+
+        const link = createPerspectiveLink(
+            documentRef,
+            perspective,
+            'perspective-recent-link',
+            perspective.page ? 'Read →' : 'Download PDF →'
+        );
+
+        item.append(date, title, link);
+        return item;
+    }
+
+    function createHomepageEmptyStates(documentRef) {
+        const featured = documentRef.createElement('article');
+        featured.className = 'perspective-feature perspective-feature--empty';
+
+        const label = documentRef.createElement('span');
+        label.className = 'perspective-feature-label';
+        label.textContent = 'Perspectives';
+
+        const title = documentRef.createElement('h3');
+        title.textContent = 'More Perspectives are coming soon.';
+
+        const summary = documentRef.createElement('p');
+        summary.textContent = 'Fresh thinking on strategy, performance and transformation will appear here.';
+
+        featured.append(label, title, summary);
+
+        const recent = documentRef.createElement('article');
+        recent.className = 'perspective-recent-item perspective-recent--empty';
+
+        const recentLabel = documentRef.createElement('span');
+        recentLabel.className = 'perspective-recent-date';
+        recentLabel.textContent = 'Archive';
+
+        const recentTitle = documentRef.createElement('h3');
+        recentTitle.textContent = 'The collection will grow here.';
+
+        recent.append(recentLabel, recentTitle);
+        return { featured, recent };
+    }
+
+    function createArchiveEmptyState(documentRef) {
+        const card = documentRef.createElement('div');
+        card.className = 'perspective-card perspective-card--empty';
+
+        const label = documentRef.createElement('span');
+        label.className = 'perspective-date';
+        label.textContent = 'Archive';
+
+        const title = documentRef.createElement('h3');
+        title.textContent = 'More Perspectives are coming soon.';
+
+        const summary = documentRef.createElement('p');
+        summary.textContent = 'The complete collection will appear here as new pieces are published.';
+
+        card.append(label, title, summary);
+        return card;
+    }
+
+    function observeElements(elements, observer) {
+        elements.forEach(element => {
+            element.classList.add('reveal');
+            if (observer) {
+                observer.observe(element);
+            }
+        });
+    }
+
+    async function fetchPerspectives(options) {
+        const response = await options.fetch(options.dataUrl || 'perspectives.json');
+
+        if (!response.ok) {
+            throw new Error(`Unable to load Perspectives (${response.status})`);
+        }
+
+        return normalizePerspectives(await response.json());
+    }
+
     async function loadPerspectives(options) {
         try {
-            const response = await options.fetch('perspectives.json');
-
-            if (!response.ok) {
-                throw new Error(`Unable to load Perspectives (${response.status})`);
-            }
-
-            const perspectives = normalizePerspectives(await response.json());
+            const perspectives = await fetchPerspectives(options);
 
             if (perspectives.length === 0) {
+                const emptyStates = createHomepageEmptyStates(options.document);
+                options.featured.replaceChildren(emptyStates.featured);
+                options.recent.replaceChildren(emptyStates.recent);
                 return 0;
             }
 
-            const cards = perspectives.map(perspective => {
-                const card = createPerspectiveCard(options.document, perspective);
-                card.classList.add('reveal');
-                options.observer.observe(card);
-                return card;
-            });
+            const featured = createFeaturedPerspective(options.document, perspectives[0]);
+            const recent = perspectives
+                .slice(1, 4)
+                .map(perspective => createRecentPerspective(options.document, perspective));
 
+            if (recent.length === 0) {
+                recent.push(createHomepageEmptyStates(options.document).recent);
+            }
+
+            observeElements([featured, ...recent], options.observer);
+
+            options.featured.replaceChildren(featured);
+            options.recent.replaceChildren(...recent);
+            return perspectives.length;
+        } catch (error) {
+            if (options.onError) {
+                options.onError(error);
+            }
+            return 0;
+        }
+    }
+
+    async function loadPerspectiveArchive(options) {
+        try {
+            const perspectives = await fetchPerspectives(options);
+
+            if (perspectives.length === 0) {
+                options.grid.replaceChildren(createArchiveEmptyState(options.document));
+                return 0;
+            }
+
+            const cards = perspectives.map(perspective => (
+                createPerspectiveCard(options.document, perspective)
+            ));
+
+            observeElements(cards, options.observer);
             options.grid.replaceChildren(...cards);
             return cards.length;
         } catch (error) {
@@ -118,6 +267,9 @@
         normalizePerspectives,
         formatPerspectiveDate,
         createPerspectiveCard,
-        loadPerspectives
+        createFeaturedPerspective,
+        createRecentPerspective,
+        loadPerspectives,
+        loadPerspectiveArchive
     };
 });

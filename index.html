@@ -336,13 +336,29 @@
                 <p class="section-subtitle">Periodic insights, published as a short read with an in-depth
                     PDF.</p>
             </div>
-            <div class="perspectives-grid">
-                <div class="perspective-card perspective-card--placeholder">
-                    <span class="perspective-date">Coming soon</span>
-                    <h3>First Perspective</h3>
-                    <p>New Perspectives will be published here periodically. Check back soon for the first
-                        edition.</p>
+            <div class="perspectives-showcase">
+                <div class="perspective-feature-slot">
+                    <article class="perspective-feature perspective-feature--placeholder">
+                        <span class="perspective-feature-label">Latest Perspective</span>
+                        <h3>Loading the latest Perspective…</h3>
+                        <p>Fresh thinking on the decisions that shape strategy, performance and transformation.</p>
+                    </article>
                 </div>
+                <aside class="perspectives-recent" aria-labelledby="recent-perspectives-title">
+                    <div class="perspectives-recent-header">
+                        <h3 id="recent-perspectives-title">Recent Perspectives</h3>
+                        <a href="perspectives/" class="perspectives-archive-link">Browse all →</a>
+                    </div>
+                    <div class="perspectives-recent-list">
+                        <article class="perspective-recent-item perspective-recent--placeholder">
+                            <span class="perspective-recent-date">Archive</span>
+                            <h3>More Perspectives are being loaded.</h3>
+                        </article>
+                    </div>
+                </aside>
+            </div>
+            <div class="perspectives-mobile-archive">
+                <a href="perspectives/" class="perspectives-archive-link">Browse all Perspectives →</a>
             </div>
         </div>
     </section>
@@ -452,14 +468,15 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .approach-card, .perspective-card, .about-content, .about-image, .career-item').forEach(el => {
+        document.querySelectorAll('.service-card, .approach-card, .about-content, .about-image, .career-item').forEach(el => {
             el.classList.add('reveal');
             observer.observe(el);
         });
 
         Perspectives.loadPerspectives({
             document,
-            grid: document.querySelector('.perspectives-grid'),
+            featured: document.querySelector('.perspective-feature-slot'),
+            recent: document.querySelector('.perspectives-recent-list'),
             fetch: window.fetch.bind(window),
             onError: error => console.error('Unable to load Perspectives:', error),
             observer
