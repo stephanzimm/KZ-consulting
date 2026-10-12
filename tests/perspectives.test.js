@@ -347,13 +347,13 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.equal(data.length, 5);
-    assert.equal(data[0].date, '2026-10-05');
-    assert.equal(data[0].title, 'When Empowerment Isn’t Enough');
-    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-05-when-empowerment-isnt-enough.pdf');
-    assert.equal(data[0].page, '/perspectives/when-empowerment-isnt-enough.html');
-    assert.equal(data[1].title, 'The Great M&A Synergy Illusion');
-    assert.equal(data[1].page, '/perspectives/the-great-ma-synergy-illusion.html');
+    assert.equal(data.length, 6);
+    assert.equal(data[0].date, '2026-10-12');
+    assert.equal(data[0].title, 'The Myth of the Perfect Organization');
+    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-06-the-myth-of-the-perfect-organization.pdf');
+    assert.equal(data[0].page, '/perspectives/the-myth-of-the-perfect-organization.html');
+    assert.equal(data[1].title, 'When Empowerment Isn’t Enough');
+    assert.equal(data[1].page, '/perspectives/when-empowerment-isnt-enough.html');
 
     const pdfPath = path.join(projectRoot, data[0].pdf.replace(/^\//, ''));
     const pagePath = path.join(projectRoot, data[0].page.replace(/^\//, ''));
@@ -363,7 +363,7 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
 
     const page = fs.readFileSync(pagePath, 'utf8');
 
-    assert.match(page, /<title>When Empowerment Isn&rsquo;t Enough \| Karel Zimmermann Consulting<\/title>/);
-    assert.match(page, /<meta property="article:published_time" content="2026-10-05">/);
-    assert.match(page, /href="kz-perspectives-05-when-empowerment-isnt-enough\.pdf"/);
+    assert.match(page, /<title>The Myth of the Perfect Organization \| Karel Zimmermann Consulting<\/title>/);
+    assert.match(page, /<meta property="article:published_time" content="2026-10-12">/);
+    assert.match(page, /href="kz-perspectives-06-the-myth-of-the-perfect-organization\.pdf"/);
 });
