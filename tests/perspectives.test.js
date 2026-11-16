@@ -347,13 +347,13 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.equal(data.length, 8);
-    assert.equal(data[0].date, '2026-11-05');
-    assert.equal(data[0].title, 'Culture is an Outcome, Not an Initiative');
-    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-08-culture-is-an-outcome-not-an-initiative.pdf');
-    assert.equal(data[0].page, '/perspectives/culture-is-an-outcome-not-an-initiative.html');
-    assert.equal(data[1].title, 'The Local Exception Trap');
-    assert.equal(data[1].page, '/perspectives/the-local-exception-trap.html');
+    assert.equal(data.length, 9);
+    assert.equal(data[0].date, '2026-11-16');
+    assert.equal(data[0].title, 'When a Leadership Team Becomes a Collection of Leaders');
+    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-09-when-a-leadership-team-becomes-a-collection-of-leaders.pdf');
+    assert.equal(data[0].page, '/perspectives/when-a-leadership-team-becomes-a-collection-of-leaders.html');
+    assert.equal(data[1].title, 'Culture is an Outcome, Not an Initiative');
+    assert.equal(data[1].page, '/perspectives/culture-is-an-outcome-not-an-initiative.html');
 
     const pdfPath = path.join(projectRoot, data[0].pdf.replace(/^\//, ''));
     const pagePath = path.join(projectRoot, data[0].page.replace(/^\//, ''));
@@ -363,7 +363,7 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
 
     const page = fs.readFileSync(pagePath, 'utf8');
 
-    assert.match(page, /<title>Culture is an Outcome, Not an Initiative \| Karel Zimmermann Consulting<\/title>/);
-    assert.match(page, /<meta property="article:published_time" content="2026-11-05">/);
-    assert.match(page, /href="kz-perspectives-08-culture-is-an-outcome-not-an-initiative\.pdf"/);
+    assert.match(page, /<title>When a Leadership Team Becomes a Collection of Leaders \| Karel Zimmermann Consulting<\/title>/);
+    assert.match(page, /<meta property="article:published_time" content="2026-11-16">/);
+    assert.match(page, /href="kz-perspectives-09-when-a-leadership-team-becomes-a-collection-of-leaders\.pdf"/);
 });
