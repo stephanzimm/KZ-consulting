@@ -347,13 +347,13 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
         assert.match(config, new RegExp(`- name: ${field}`));
     }
 
-    assert.equal(data.length, 9);
-    assert.equal(data[0].date, '2026-11-16');
-    assert.equal(data[0].title, 'When a Leadership Team Becomes a Collection of Leaders');
-    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-09-when-a-leadership-team-becomes-a-collection-of-leaders.pdf');
-    assert.equal(data[0].page, '/perspectives/when-a-leadership-team-becomes-a-collection-of-leaders.html');
-    assert.equal(data[1].title, 'Culture is an Outcome, Not an Initiative');
-    assert.equal(data[1].page, '/perspectives/culture-is-an-outcome-not-an-initiative.html');
+    assert.equal(data.length, 10);
+    assert.equal(data[0].date, '2026-11-24');
+    assert.equal(data[0].title, 'Customer Satisfaction Is Everyone’s Job – So, Who Owns It?');
+    assert.equal(data[0].pdf, '/perspectives/kz-perspectives-10-customer-satisfaction-is-everyones-job.pdf');
+    assert.equal(data[0].page, '/perspectives/customer-satisfaction-is-everyones-job.html');
+    assert.equal(data[1].title, 'When a Leadership Team Becomes a Collection of Leaders');
+    assert.equal(data[1].page, '/perspectives/when-a-leadership-team-becomes-a-collection-of-leaders.html');
 
     const pdfPath = path.join(projectRoot, data[0].pdf.replace(/^\//, ''));
     const pagePath = path.join(projectRoot, data[0].page.replace(/^\//, ''));
@@ -363,7 +363,7 @@ test('defines the Pages CMS Perspective schema and published Perspective data', 
 
     const page = fs.readFileSync(pagePath, 'utf8');
 
-    assert.match(page, /<title>When a Leadership Team Becomes a Collection of Leaders \| Karel Zimmermann Consulting<\/title>/);
-    assert.match(page, /<meta property="article:published_time" content="2026-11-16">/);
-    assert.match(page, /href="kz-perspectives-09-when-a-leadership-team-becomes-a-collection-of-leaders\.pdf"/);
+    assert.match(page, /<title>Customer Satisfaction Is Everyone’s Job – So, Who Owns It\? \| Karel Zimmermann Consulting<\/title>/);
+    assert.match(page, /<meta property="article:published_time" content="2026-11-24">/);
+    assert.match(page, /href="kz-perspectives-10-customer-satisfaction-is-everyones-job\.pdf"/);
 });
